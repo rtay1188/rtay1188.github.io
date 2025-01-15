@@ -15,7 +15,6 @@ const xLabels = [
 
 export default function Chart() {
   return (
-    // Need to check that it works with white and dark theme...
     <LineChart
       width={500}
       height={300}
