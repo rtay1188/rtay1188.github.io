@@ -17,7 +17,9 @@
     "@mui/material": "^6.4.0",
     "@mui/material-nextjs": "^6.3.1",
     "@mui/x-charts": "^7.23.6",
+    "@types/papaparse": "^5.3.15",
     "next": "^15.1.4",
+    "papaparse": "^5.5.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

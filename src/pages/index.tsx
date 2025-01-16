@@ -5,6 +5,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { getYTDData } from "@/components/csvparse";
+import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +18,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Home() {
+type YTDData = {
+  xLabels: string[],
+  yLabels: number[],
+}
+
+export const getStaticProps = (async () => {
+  const ytdData  = await getYTDData("./src/data/ytd.csv")
+  return { props: { ytdData } }
+}) satisfies GetStaticProps<{
+  ytdData: YTDData
+}> 
+
+export default function Home({
+  ytdData,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -70,7 +86,7 @@ export default function Home() {
             </a>
           </div>
           <div>
-          <Chart/>
+          <Chart xLabels={ytdData.xLabels} yLabels={ytdData.yLabels}/>
           </div>
         </main>
         <footer className={styles.footer}>
